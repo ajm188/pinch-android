@@ -1,5 +1,7 @@
 package com.pinch_n.pinch;
 
+import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.Locale;
 
 import android.support.v7.app.ActionBarActivity;
@@ -16,6 +18,8 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.LinearLayout;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 
@@ -134,21 +138,21 @@ public class PinchMain extends ActionBarActivity implements ActionBar.TabListene
         @Override
         public int getCount() {
             // Show 3 total pages.
-            return 3;
+            return 30;
         }
 
         @Override
         public CharSequence getPageTitle(int position) {
-            Locale l = Locale.getDefault();
-            switch (position) {
-                case 0:
-                    return getString(R.string.title_section1).toUpperCase(l);
-                case 1:
-                    return getString(R.string.title_section2).toUpperCase(l);
-                case 2:
-                    return getString(R.string.title_section3).toUpperCase(l);
-            }
-            return null;
+            Calendar day = Calendar.getInstance();
+            day.roll(Calendar.DAY_OF_YEAR, position);
+            return formatDate(day);
+        }
+
+        private CharSequence formatDate(Calendar day) {
+            String month = day.getDisplayName(Calendar.MONTH, Calendar.LONG, Locale.US);
+            String week_day = day.getDisplayName(Calendar.DAY_OF_WEEK,Calendar.LONG, Locale.US);
+            int day_month = day.get(Calendar.DAY_OF_MONTH);
+            return String.format("%s, %s %d", week_day, month, day_month);
         }
     }
 
@@ -181,7 +185,29 @@ public class PinchMain extends ActionBarActivity implements ActionBar.TabListene
         public View onCreateView(LayoutInflater inflater, ViewGroup container,
                                  Bundle savedInstanceState) {
             View rootView = inflater.inflate(R.layout.fragment_pinch_main, container, false);
+            LinearLayout eventList = (LinearLayout) rootView.findViewById(R.id.events_list);
+            ArrayList<Event> list = new ArrayList<>();
+            list.add(new Event("New Event", new Organization("Habitat for Humanity"),
+                    new EventLocation("Oceanview"), Calendar.getInstance(), Calendar.getInstance()));
+
+            for (Event event: list) {
+                eventList.addView(createEventView(event, rootView));
+            }
             return rootView;
+        }
+
+        public View createEventView(Event event, View rootView) {
+            LayoutInflater inflater = LayoutInflater.from(rootView.getContext());
+            View relLay = inflater.inflate(R.layout.event_list_event,
+                    null, false);
+
+            Utils.setTextViewText(R.id.event_name, relLay, event.getName());
+            Utils.setTextViewText(R.id.event_org, relLay, event.getOrg().getName());
+            Utils.setTextViewText(R.id.event_loc, relLay, event.getLocation().getName());
+            Utils.setTextViewText(R.id.event_time, relLay, String.format("%s -\n%s",
+                    event.startTimeString(), event.startTimeString()));
+            Utils.setTextViewText(R.id.event_duration, relLay, Utils.durationString(event.duration()));
+            return relLay;
         }
     }
 
