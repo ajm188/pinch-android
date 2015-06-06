@@ -1,8 +1,19 @@
 <resources>
 
     <!-- Base application theme. -->
-    <style name="AppTheme" parent="Theme.AppCompat.Light.DarkActionBar">
-        <!-- Customize your theme here. -->
+    <style name="PinchTheme" parent="Theme.AppCompat.Light.DarkActionBar">
+        <item name="android:actionBarStyle">@style/PinchTheme.ActionBar</item>
+        <item name="actionBarStyle">@style/PinchTheme.ActionBar</item>
     </style>
-
+    <style name="PinchTheme.MediumText" parent="@style/PinchTheme">
+        <item name="android:textColor">@color/pinch_main</item>
+        <item name="android:textSize">15sp</item>
+    </style>
+    <style name="PinchTheme.SmallText" parent="@style/PinchTheme">
+        <item name="android:textSize">10sp</item>
+    </style>
+    <style name="PinchTheme.ActionBar" parent="@style/Widget.AppCompat.Light.ActionBar.Solid.Inverse">
+        <item name="android:background">@drawable/actionbar_background</item>
+        <item name="background">@drawable/actionbar_background</item>
+    </style>
 </resources>
