@@ -2,6 +2,8 @@ package com.pinch_in.pinch;
 
 import android.content.Context;
 import android.content.SharedPreferences;
+import android.content.res.AssetManager;
+import android.graphics.Typeface;
 import android.util.Log;
 import android.util.Patterns;
 import android.view.View;
@@ -30,12 +32,6 @@ public class Utils {
     private static final long[] duration_vals = {1, 60, 3600, 86400, 604800, Long.MAX_VALUE};
     private static final String[] duration_labels = {"Sec", "Min", "Hr", "Day", "Week", "Year"};
     public static final String PREFS_FILE = "pinch_internal";
-
-    public static boolean setTextViewText(int resource, View rootView, String text) {
-        TextView textView = (TextView) rootView.findViewById(resource);
-        textView.setText(text);
-        return true;
-    }
 
     public static String formatTime(Calendar time) {
         int hour = time.get(Calendar.HOUR);
@@ -97,5 +93,22 @@ public class Utils {
         String week_day = day.getDisplayName(Calendar.DAY_OF_WEEK,Calendar.LONG, Locale.US);
         int day_month = day.get(Calendar.DAY_OF_MONTH);
         return String.format("%s, %s %d", week_day, month, day_month);
+    }
+
+    public static Typeface getTypeFace(AssetManager asset) {
+        return Typeface.createFromAsset(asset, "fonts/Lobster_Regular.ttf");
+    }
+
+    public static boolean setTextViewText(int resource, View rootView, String text) {
+        return setTextViewText(resource, rootView, text, null);
+    }
+
+    public static boolean setTextViewText(int resource, View rootView, String text, Typeface tf) {
+        TextView textView = (TextView) rootView.findViewById(resource);
+        if (tf != null) {
+            textView.setTypeface(tf);
+        }
+        textView.setText(text);
+        return true;
     }
 }
