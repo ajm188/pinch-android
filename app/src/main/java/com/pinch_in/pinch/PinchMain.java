@@ -1,4 +1,4 @@
-package com.pinch_n.pinch;
+package com.pinch_in.pinch;
 
 import java.util.ArrayList;
 import java.util.Calendar;
@@ -12,15 +12,15 @@ import android.support.v4.app.FragmentTransaction;
 import android.support.v4.app.FragmentPagerAdapter;
 import android.os.Bundle;
 import android.support.v4.view.ViewPager;
-import android.view.Gravity;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.LinearLayout;
-import android.widget.RelativeLayout;
-import android.widget.TextView;
+
+import com.pinch_in.pinch.R;
 
 
 public class PinchMain extends ActionBarActivity implements ActionBar.TabListener {
@@ -182,17 +182,30 @@ public class PinchMain extends ActionBarActivity implements ActionBar.TabListene
         }
 
         @Override
-        public View onCreateView(LayoutInflater inflater, ViewGroup container,
+        public View onCreateView(final LayoutInflater inflater, ViewGroup container,
                                  Bundle savedInstanceState) {
             View rootView = inflater.inflate(R.layout.fragment_pinch_main, container, false);
-            LinearLayout eventList = (LinearLayout) rootView.findViewById(R.id.events_list);
-            ArrayList<Event> list = new ArrayList<>();
-            list.add(new Event("New Event", new Organization("Habitat for Humanity"),
-                    new EventLocation("Oceanview"), Calendar.getInstance(), Calendar.getInstance()));
+            final LinearLayout eventList = (LinearLayout) rootView.findViewById(R.id.events_list);
+            APICall.getEvents(rootView.getContext(), new APICall.OnAPICallComplete<Event[]>() {
+                @Override
+                public void callComplete(Event[] result) {
+                    if (result == null) {
+                        return;
+                    }
+                    boolean border = false;
 
-            for (Event event: list) {
-                eventList.addView(createEventView(event, rootView));
-            }
+                    for (Event event : result) {
+                        if (border) {
+                            View borderView = inflater.inflate(R.layout.divider, eventList, false);
+                            eventList.addView(borderView);
+                        } else {
+                            border = true;
+                        }
+                        eventList.addView(createEventView(event, eventList));
+                    }
+                }
+            });
+
             return rootView;
         }
 
@@ -201,11 +214,11 @@ public class PinchMain extends ActionBarActivity implements ActionBar.TabListene
             View relLay = inflater.inflate(R.layout.event_list_event,
                     null, false);
 
-            Utils.setTextViewText(R.id.event_name, relLay, event.getName());
+            Utils.setTextViewText(R.id.event_name, relLay, event.getTitle());
             Utils.setTextViewText(R.id.event_org, relLay, event.getOrg().getName());
             Utils.setTextViewText(R.id.event_loc, relLay, event.getLocation().getName());
             Utils.setTextViewText(R.id.event_time, relLay, String.format("%s -\n%s",
-                    event.startTimeString(), event.startTimeString()));
+                    event.startTimeString(), event.endTimeString()));
             Utils.setTextViewText(R.id.event_duration, relLay, Utils.durationString(event.duration()));
             return relLay;
         }
