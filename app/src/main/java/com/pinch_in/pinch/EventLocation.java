@@ -1,12 +1,13 @@
-package com.pinch_n.pinch;
+package com.pinch_in.pinch;
 
 /**
  * Created by kdeal on 6/6/15.
  */
-public class Organization {
+public class EventLocation {
+
     private String name;
 
-    Organization(String name) {
+    public EventLocation(String name) {
         this.name = name;
     }
 
@@ -14,3 +15,4 @@ public class Organization {
         return name;
     }
 }
+
