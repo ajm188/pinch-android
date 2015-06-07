@@ -1,4 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <color name="pinch_main">#1ddbd7</color>
+    <color name="grey">#9E9E9E</color>
 </resources>

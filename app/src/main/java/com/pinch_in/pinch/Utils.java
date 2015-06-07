@@ -1,8 +1,12 @@
 package com.pinch_in.pinch;
 
+import android.content.Context;
+import android.content.SharedPreferences;
 import android.util.Log;
+import android.util.Patterns;
 import android.view.View;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
@@ -23,8 +27,9 @@ public class Utils {
 
     private static final int EOF = -1;
     private static Gson gson;
-    private static long[] duration_vals = {1, 60, 3600, 86400, 604800, Long.MAX_VALUE};
-    private static String[] duration_labels = {"Sec", "Min", "Hr", "Day", "Week", "Year"};
+    private static final long[] duration_vals = {1, 60, 3600, 86400, 604800, Long.MAX_VALUE};
+    private static final String[] duration_labels = {"Sec", "Min", "Hr", "Day", "Week", "Year"};
+    public static final String PREFS_FILE = "pinch_internal";
 
     public static boolean setTextViewText(int resource, View rootView, String text) {
         TextView textView = (TextView) rootView.findViewById(resource);
@@ -77,5 +82,20 @@ public class Utils {
                     .create();
         }
         return gson;
+    }
+
+    public static void shortToast(int string, Context context) {
+        Toast toast = Toast.makeText(context, string, Toast.LENGTH_SHORT);
+        toast.show();
+    }
+
+    public static boolean validEmail(String email) {
+        return !email.isEmpty() && Patterns.EMAIL_ADDRESS.matcher(email).matches();
+    }
+    public static String formatDate(Calendar day) {
+        String month = day.getDisplayName(Calendar.MONTH, Calendar.LONG, Locale.US);
+        String week_day = day.getDisplayName(Calendar.DAY_OF_WEEK,Calendar.LONG, Locale.US);
+        int day_month = day.get(Calendar.DAY_OF_MONTH);
+        return String.format("%s, %s %d", week_day, month, day_month);
     }
 }

@@ -5,6 +5,10 @@
         <item name="android:actionBarStyle">@style/PinchTheme.ActionBar</item>
         <item name="actionBarStyle">@style/PinchTheme.ActionBar</item>
     </style>
+    <style name="PinchTheme.LargeText" parent="PinchTheme">
+        <item name="android:textColor">@color/pinch_main</item>
+        <item name="android:textSize">30sp</item>
+    </style>
     <style name="PinchTheme.MediumText" parent="@style/PinchTheme">
         <item name="android:textColor">@color/pinch_main</item>
         <item name="android:textSize">15sp</item>
@@ -15,6 +19,16 @@
     <style name="PinchTheme.ActionBar" parent="@style/Widget.AppCompat.Light.ActionBar.Solid.Inverse">
         <item name="android:background">@drawable/actionbar_background</item>
         <item name="background">@drawable/actionbar_background</item>
+    </style>
+    <style name="PinchTheme.NavDrawerText" parent="PinchTheme">
+        <item name="android:textSize">25dp</item>
+        <item name="android:textColor">@color/pinch_main</item>
+        <item name="android:background">@drawable/nav_draw_text_background</item>
+        <item name="android:layout_gravity">center</item>
+        <item name="android:paddingTop">@dimen/nav_drawer_vert_padding</item>
+        <item name="android:paddingBottom">@dimen/nav_drawer_vert_padding</item>
+        <item name="android:paddingLeft">@dimen/nav_bar_horiz_padding</item>
+        <item name="android:paddingRight">@dimen/nav_bar_horiz_padding</item>
     </style>
     <style name="PinchTheme.Divider">
         <item name="android:layout_width">match_parent</item>
