@@ -1,0 +1,105 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools" android:layout_width="match_parent"
+    android:layout_height="match_parent" tools:context="com.pinch_in.pinch.BlankFragment"
+    android:orientation="vertical"
+    android:weightSum="10">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <ImageView
+            android:layout_width="120dp"
+            android:layout_height="150dp"
+            android:id="@+id/profile_pic"
+            android:layout_gravity="left|top"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentTop="true"
+            android:contentDescription="@string/desc_your_profile"
+            android:src="@drawable/blank_profile"
+            android:scaleType="fitStart"
+            android:layout_margin="@dimen/list_pad" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/profile_name"
+            android:layout_toRightOf="@+id/profile_pic"
+            android:layout_alignTop="@+id/profile_pic"
+            style="@style/PinchTheme.LargeText" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/profile_prof_lbl"
+            android:layout_toRightOf="@+id/profile_pic"
+            android:layout_below="@+id/profile_name"
+            android:text="@string/title_profession"
+            android:textStyle="bold" />
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/profile_prof"
+            android:layout_toRightOf="@+id/profile_pic"
+            android:layout_below="@+id/profile_prof_lbl"
+            android:layout_toEndOf="@id/profile_pic"
+            android:textAlignment="viewStart" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/title_interests"
+            android:id="@+id/profile_interests_lbl"
+            android:layout_toRightOf="@+id/profile_pic"
+            android:layout_below="@+id/profile_prof"
+            android:textStyle="bold" />
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/profile_interests"
+            android:layout_alignParentBottom="false"
+            android:layout_toRightOf="@+id/profile_pic"
+            android:layout_toEndOf="@+id/profile_pic"
+            android:layout_below="@+id/profile_interests_lbl" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/profile_skills_lbl"
+            android:layout_below="@+id/profile_interests"
+            android:layout_toRightOf="@+id/profile_pic"
+            android:text="@string/title_skills"
+            android:textStyle="bold" />
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/profile_skills"
+            android:layout_toRightOf="@+id/profile_pic"
+            android:layout_below="@+id/profile_skills_lbl" />
+    </RelativeLayout>
+
+    <Switch
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/title_charities_contact"
+        android:id="@+id/profile_charities_contact"
+        android:clickable="true"
+        android:enabled="true"
+        android:layout_gravity="center_horizontal"
+        android:checked="false" />
+
+    <LinearLayout
+        android:orientation="vertical"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:layout_marginLeft="0dp"
+        android:layout_alignParentTop="true"
+        android:layout_marginTop="511dp"
+        android:id="@+id/profile_feed"
+        android:layout_weight="5"></LinearLayout>
+
+</LinearLayout>
