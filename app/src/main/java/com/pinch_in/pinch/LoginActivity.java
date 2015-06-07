@@ -1,11 +1,13 @@
 package com.pinch_in.pinch;
 
+import android.graphics.Typeface;
 import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.EditText;
+import android.widget.TextView;
 
 public class LoginActivity extends ActionBarActivity {
 
@@ -13,6 +15,14 @@ public class LoginActivity extends ActionBarActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
+
+        Typeface tf = Utils.getTypeFace(getAssets());
+
+        TextView logo = (TextView) findViewById(R.id.login_logo);
+        logo.setTypeface(tf);
+
+        TextView login = (TextView) findViewById(R.id.login_submit);
+        login.setTypeface(tf);
     }
 
     @Override

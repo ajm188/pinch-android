@@ -9,6 +9,9 @@
         <item name="android:textColor">@color/pinch_main</item>
         <item name="android:textSize">30sp</item>
     </style>
+    <style name="PinchTheme.LogoText" parent="PinchTheme.LargeText">
+        <item name="android:textSize">75sp</item>
+    </style>
     <style name="PinchTheme.MediumText" parent="@style/PinchTheme">
         <item name="android:textColor">@color/pinch_main</item>
         <item name="android:textSize">15sp</item>

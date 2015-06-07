@@ -55,6 +55,9 @@ public class Main extends ActionBarActivity
         FragmentManager fragmentManager = getSupportFragmentManager();
         Fragment fragment;
         switch (position + 1) {
+            case 1:
+                fragment = ProfileFragment.newInstance();
+                break;
             case 3:
                 fragment = EventsFinder.newInstance(position);
                 break;
