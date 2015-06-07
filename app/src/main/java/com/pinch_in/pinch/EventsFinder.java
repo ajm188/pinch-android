@@ -37,8 +37,8 @@ public class EventsFinder extends Fragment {
         View rootView = inflater.inflate(R.layout.fragment_events_finder, container, false);
         final LinearLayout eventList = (LinearLayout) rootView.findViewById(R.id.events_list);
         APICall.getEvents(rootView.getContext(), new APICall.OnAPICallComplete<Event[]>() {
-                                             @Override
-                                             public void callComplete(Event[] result) {
+            @Override
+            public void callComplete(Event[] result) {
                 if (result == null) {
                     return;
                 }
@@ -53,8 +53,8 @@ public class EventsFinder extends Fragment {
                     }
                     eventList.addView(createEventView(event, eventList));
                 }
-        }
-    });
+            }
+        });
 
         return rootView;
     }
@@ -63,6 +63,7 @@ public class EventsFinder extends Fragment {
         LayoutInflater inflater = LayoutInflater.from(rootView.getContext());
         View relLay = inflater.inflate(R.layout.event_list_event,
                 null, false);
+        relLay.setId(event.getID());
 
         Utils.setTextViewText(R.id.event_name, relLay, event.getTitle());
         Utils.setTextViewText(R.id.event_org, relLay, event.getOrg().getName());
