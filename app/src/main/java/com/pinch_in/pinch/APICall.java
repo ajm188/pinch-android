@@ -4,6 +4,7 @@ import android.content.Context;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 import android.os.AsyncTask;
+import android.os.Build;
 import android.util.JsonReader;
 import android.util.Log;
 
@@ -97,6 +98,16 @@ public class APICall extends AsyncTask<String, Void, String> {
         }
     }
 
+    private static String getServerURL() {
+        if (Build.TAGS.indexOf("test-keys") == -1) {
+            // production
+            return "http://pinch-in.com/";
+        } else {
+            // dev - change this IP to whatever works for your development env
+            return "http://10.0.2.2:8080/";
+        }
+    }
+
     public static boolean getEvents(Context context, final OnAPICallComplete<Event[]> onCallComplete) {
         APICall apiCall = new APICall(context, new OnAPICallComplete<String>() {
 
@@ -110,7 +121,7 @@ public class APICall extends AsyncTask<String, Void, String> {
             return false;
         }
 
-        apiCall.execute(APICall.SERVER_URL + APICall.EVENT_URL, "GET", null);
+        apiCall.execute(APICall.getServerURL() + APICall.EVENT_URL, "GET", null);
         return true;
     }
 
