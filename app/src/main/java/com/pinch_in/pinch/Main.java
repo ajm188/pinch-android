@@ -8,6 +8,7 @@ import android.support.v4.app.FragmentManager;
 import android.content.Context;
 import android.os.Build;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.Menu;
@@ -52,7 +53,7 @@ public class Main extends ActionBarActivity
     public void onNavigationDrawerItemSelected(int position) {
         // update the main content by replacing fragments
         FragmentManager fragmentManager = getSupportFragmentManager();
-        Fragment fragment = EventsFinder.newInstance(position);
+        Fragment fragment;
         switch (position + 1) {
             case 3:
                 fragment = EventsFinder.newInstance(position);
@@ -63,6 +64,16 @@ public class Main extends ActionBarActivity
         fragmentManager.beginTransaction()
                 .replace(R.id.container, fragment)
                 .commit();
+    }
+
+    public boolean onEventClick(View view) {
+        FragmentManager fragmentManager = getSupportFragmentManager();
+        Fragment fragment = EventFragment.newInstance(view.getId());
+
+        fragmentManager.beginTransaction()
+                .replace(R.id.container, fragment)
+                .commit();
+        return true;
     }
 
     public void onSectionAttached(int number) {

@@ -29,6 +29,10 @@ public class Event {
         this.end_time = end_time;
     }
 
+    public int getID() { return id; }
+
+    public String getDescription() { return description; }
+
     public String getTitle() {
         return title;
     }

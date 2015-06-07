@@ -125,6 +125,22 @@ public class APICall extends AsyncTask<String, Void, String> {
         return true;
     }
 
+    public static boolean getEvent(int eventID, Context context, final OnAPICallComplete<Event> onCallComplete) {
+        APICall apiCall = new APICall(context, new OnAPICallComplete<String>() {
+            @Override
+            public void callComplete(String result) {
+                Event event = Utils.getGson().fromJson(result, Event.class);
+                onCallComplete.callComplete(event);
+            }
+        });
+        if (!apiCall.hasNetwork()) {
+            return false;
+        }
+
+        apiCall.execute(APICall.getServerURL() + "events/" + eventID + ".json", "GET", null);
+        return true;
+    }
+
     public interface OnAPICallComplete<O> {
         public void callComplete(O result);
     }
