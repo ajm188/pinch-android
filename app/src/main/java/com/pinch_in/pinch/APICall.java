@@ -29,7 +29,6 @@ import java.util.ServiceConfigurationError;
  */
 public class APICall extends AsyncTask<String, Void, String> {
 
-    private static final String SERVER_URL = "http://10.3.17.219:3000/";
     private static final String EVENT_URL = "events.json";
 
     private Context context;
@@ -104,7 +103,7 @@ public class APICall extends AsyncTask<String, Void, String> {
             return "http://pinch-in.com/";
         } else {
             // dev - change this IP to whatever works for your development env
-            return "http://10.0.2.2:8080/";
+            return "http://10.3.17.219:3000/";
         }
     }
 
