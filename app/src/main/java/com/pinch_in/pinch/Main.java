@@ -66,6 +66,8 @@ public class Main extends ActionBarActivity
         fragmentManager.beginTransaction()
                 .replace(R.id.container, fragment)
                 .commit();
+        onSectionAttached(position + 1);
+        setTitle(mTitle);
     }
 
     public void onSectionAttached(int number) {

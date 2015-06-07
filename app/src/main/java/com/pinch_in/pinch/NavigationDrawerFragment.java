@@ -1,5 +1,6 @@
 package com.pinch_in.pinch;
 
+import android.content.Context;
 import android.support.v7.app.ActionBarActivity;
 import android.app.Activity;
 import android.support.v7.app.ActionBar;
@@ -20,6 +21,7 @@ import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
+import android.widget.TextView;
 import android.widget.Toast;
 
 /**
@@ -97,7 +99,7 @@ public class NavigationDrawerFragment extends Fragment {
                 selectItem(position);
             }
         });
-        mDrawerListView.setAdapter(new ArrayAdapter<String>(
+        mDrawerListView.setAdapter(new NavDrawerAdapter(
                 getActionBar().getThemedContext(),
                 R.layout.nav_drawer_text_view,
                 R.id.nav_drawer_text,
@@ -287,5 +289,20 @@ public class NavigationDrawerFragment extends Fragment {
          * Called when an item in the navigation drawer is selected.
          */
         void onNavigationDrawerItemSelected(int position);
+    }
+
+    public class NavDrawerAdapter extends ArrayAdapter<String> {
+
+        public NavDrawerAdapter(Context context, int resource, int textViewResourceId, String[] objects) {
+            super(context, resource, textViewResourceId, objects);
+        }
+
+        @Override
+        public View getView(int position, View convertView, ViewGroup parent) {
+            TextView label = (TextView) LayoutInflater.from(getContext()).inflate(R.layout.nav_drawer_text_view, parent, false);
+            label.setTypeface(Utils.getTypeFace(getActivity().getAssets()));
+            label.setText(getItem(position));
+            return label;
+        }
     }
 }
