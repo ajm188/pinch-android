@@ -16,7 +16,7 @@ public class LoginActivity extends ActionBarActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
 
-        Typeface tf = Typeface.createFromAsset(getAssets(), "fonts/Lobster_Regular.ttf");
+        Typeface tf = Utils.getTypeFace(getAssets());
 
         TextView logo = (TextView) findViewById(R.id.login_logo);
         logo.setTypeface(tf);
